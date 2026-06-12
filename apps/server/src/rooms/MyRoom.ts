@@ -3,13 +3,13 @@ import { Room, Client } from "colyseus";
 import { Schema, MapSchema, type } from "@colyseus/schema";
 
 export class Vec2 extends Schema {
-  @type("number") x: number;
-  @type("number") y: number;
+  @type("number") x!: number;
+  @type("number") y!: number;
 }
 
 export class Player extends Schema {
-  @type("string") username: string;
-  @type("number") heroType: number; // sprite to use (1-12)
+  @type("string") username!: string;
+  @type("number") heroType!: number; // sprite to use (1-12)
   @type(Vec2) position = new Vec2();
 }
 
@@ -28,6 +28,9 @@ export class MyRoom extends Room {
   onCreate (options: any) {
     this.onMessage("move", (client, message) => {
       const player = this.state.players.get(client.sessionId);
+      if (!player) {
+        return;
+      }
       player.position.x = message.x;
       player.position.y = message.y;
     });
