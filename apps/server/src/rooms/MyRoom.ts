@@ -1,23 +1,10 @@
-import { JWT } from "@colyseus/auth";
-import { Room, Client } from "colyseus";
-import { Schema, MapSchema, type } from "@colyseus/schema";
+import { Room, Client, CloseCode, JWT } from "colyseus";
+import { MyRoomState, Player, Vec2 } from "./schema/MyRoomState.js";
 
-export class Vec2 extends Schema {
-  @type("number") x: number;
-  @type("number") y: number;
-}
-
-export class Player extends Schema {
-  @type("string") username: string;
-  @type("number") heroType: number; // sprite to use (1-12)
-  @type(Vec2) position = new Vec2();
-}
-
-export class MyRoomState extends Schema {
-  @type({ map: Player }) players = new MapSchema<Player>();
-}
-
-export class MyRoom extends Room {
+export class MyRoom extends Room<{
+  state: MyRoomState,
+  metadata: { channelId: string }, // matchmaking filter, see app.config.ts
+}> {
   state = new MyRoomState();
   maxClients = 4;
 
@@ -35,15 +22,17 @@ export class MyRoom extends Room {
 
   onJoin (client: Client, options: any) {
     console.log(client.sessionId, "joined!");
-    const player = new Player();
-    player.username = client.auth?.username || "Guest";
-    player.heroType = Math.floor(Math.random() * 12) + 1;
-    player.position.x = Math.floor(Math.random() * 100);
-    player.position.y = Math.floor(Math.random() * 100);
-    this.state.players.set(client.sessionId, player);
+    this.state.players.set(client.sessionId, new Player({
+      username: client.auth?.username || "Guest",
+      heroType: Math.floor(Math.random() * 12) + 1,
+      position: new Vec2({
+        x: Math.floor(Math.random() * 100),
+        y: Math.floor(Math.random() * 100),
+      }),
+    }));
   }
 
-  onLeave (client: Client, code: number) {
+  onLeave (client: Client, code: CloseCode) {
     console.log(client.sessionId, "left!");
     this.state.players.delete(client.sessionId);
   }

@@ -1,19 +1,14 @@
-import { defineServer, defineRoom } from "colyseus";
-import { monitor } from "@colyseus/monitor";
-import { playground } from "@colyseus/playground";
-import { JWT } from "@colyseus/auth";
+import { defineServer, defineRoom, monitor, playground, JWT } from "colyseus";
 import express from "express";
 
 /**
  * Import your Room files
  */
-import { MyRoom } from "./rooms/MyRoom";
+import { MyRoom } from "./rooms/MyRoom.js";
 
 export default defineServer({
     rooms: {
-        my_room: defineRoom(MyRoom, {
-            filterBy: ['channelId'],
-        }),
+        my_room: defineRoom(MyRoom).filterBy(['channelId']),
     },
 
     express: (app) => {

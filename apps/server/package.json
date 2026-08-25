@@ -3,14 +3,15 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Colyseus + Discord Embedded App SDK",
+  "type": "module",
   "main": "build/index.js",
   "engines": {
-    "node": ">= 16.13.0"
+    "node": ">= 22.0.0"
   },
   "scripts": {
     "start": "tsx watch src/index.ts",
     "loadtest": "tsx loadtest/example.ts --room my_room --numClients 2",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
     "clean": "rimraf build",
     "test": "mocha -r tsx test/**_test.ts --exit --timeout 15000"
   },
@@ -21,22 +22,20 @@
   },
   "homepage": "https://github.com/colyseus/discord-embedded-app-sdk#readme",
   "devDependencies": {
-    "@colyseus/loadtest": "^0.17.8",
-    "@colyseus/testing": "^0.17.11",
-    "@types/express": "^4.17.1",
+    "@colyseus/loadtest": "^0.18.1",
+    "@colyseus/sdk": "^0.18.2",
+    "@colyseus/testing": "^0.18.5",
+    "@types/express": "^5.0.6",
     "@types/mocha": "^10.0.1",
-    "mocha": "^10.2.0",
+    "mocha": "^11.7.5",
     "rimraf": "^5.0.0",
-    "tsx": "^3.12.6",
-    "typescript": "^5.0.4"
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@colyseus/auth": "^0.17.6",
-    "@colyseus/monitor": "^0.17.7",
-    "@colyseus/playground": "^0.17.10",
-    "@colyseus/tools": "^0.17.18",
-    "colyseus": "^0.17.8",
-    "express": "^4.18.2",
-    "uwebsockets-express": "^1.4.1"
+    "@colyseus/schema": "^5.0.19",
+    "@colyseus/tools": "^0.18.3",
+    "colyseus": "^0.18.3",
+    "express": "^5.2.1"
   }
 }

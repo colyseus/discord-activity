@@ -4,7 +4,7 @@ import TweenJS, { Easing, Tween } from "@tweenjs/tween.js";
 
 import { discordSDK } from './utils/DiscordSDK.js';
 import { colyseusSDK } from './utils/Colyseus.js';
-import type { MyRoomState, Player } from "../../server/src/rooms/MyRoom.js";
+import type { MyRoomState, Player } from "../../server/src/rooms/schema/MyRoomState.js";
 import { authenticate } from './utils/Auth.js';
 import { PlayerObject } from './objects/PlayerObject.js';
 import { Callbacks } from '@colyseus/sdk';

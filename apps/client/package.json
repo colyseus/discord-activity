@@ -33,7 +33,7 @@
     "@discord/embedded-app-sdk": "^1.9.0",
     "@pixi/tilemap": "^5.0.1",
     "@tweenjs/tween.js": "^23.1.1",
-    "@colyseus/sdk": "^0.17.26",
+    "@colyseus/sdk": "^0.18.2",
     "pixi.js": "^8.1.0"
   }
 }

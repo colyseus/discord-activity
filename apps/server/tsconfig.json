@@ -2,8 +2,8 @@
   "compilerOptions": {
     "outDir": "build",
     "target": "ESNext",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "allowJs": true,
     "strictNullChecks": false,
@@ -14,6 +14,7 @@
     "useDefineForClassFields": false
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ]
 }

@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import { Player } from "../../../server/src/rooms/MyRoom.js";
+import type { Player } from "../../../server/src/rooms/schema/MyRoomState.js";
 
 export class PlayerObject extends PIXI.Container {
   constructor(player: Player) {
